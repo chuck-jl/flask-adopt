@@ -1,0 +1,25 @@
+{{ form.hidden_tag() }}
+  <!--add type=hidden form fields -->
+  {% for field in form
+           if field.widget.input_type != 'hidden' %}
+  <div class="form-group">
+    {{ field.label }}
+    {% if field.type == "RadioField" %}
+        <br>
+        {% for subfield in field %}
+        <div class="form-check form-check-inline">
+          {{ subfield(class_='form-check-input') }}
+          {{ subfield.label(class_='form-check-label') }}
+        </div>
+        {% endfor %}
+    {% else %}
+        {{ field(class_='form-control') }}
+    {% endif %}
+    {% for error in field.errors %}
+    <small id="emailHelp" class="form-text text-danger">{{ error }}</small>
+    {% endfor %}
+
+  </div>
+  {% endfor %}
+
+  <button type="submit">Save</button>

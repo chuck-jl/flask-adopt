@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for pet in pets if pet.available == True%}
+
+    <div class="col-3 m-1">
+        <div class="card">
+            <img src={{pet.photo_url}} class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{pet.name}}</h5>
+                <p class="card-text">Available: {{pet.available}}</p>
+                <a href="/pets/{{pet.id}}" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<hr>
+<div class="row">
+    {% for pet in pets if pet.available != True%}
+
+    <div class="col-3 m-1">
+        <div class="card">
+            <img src={{pet.photo_url}} class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{pet.name}}</h5>
+                <p class="card-text">Available: {{pet.available}}</p>
+                <a href="/pets/{{pet.id}}" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a href="/pets/new" class="btn btn-success mt-3">Add a pet</a>
+{% endblock %}
